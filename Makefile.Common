@@ -1,0 +1,20 @@
+GOCMD?= go
+# build tags required by any component should be defined as an independent variables and later added to GO_BUILD_TAGS below
+GO_BUILD_TAGS=""
+GOTEST_OPT?= -race -timeout 300s --tags=$(GO_BUILD_TAGS)
+GOTEST=$(GOCMD) test
+RUNNING_ON_GITHUB_ACTION=$(GITHUB_ACTIONS)
+
+
+.PHONY: test
+test:
+	if [ "$(RUNNING_ON_GITHUB_ACTION)" = "true" ]; then \
+		$(GOTEST) $(GOTEST_OPT) -v ./... 2>&1 | tee -a ./foresight-test-report.txt; \
+	else \
+		$(GOTEST) $(GOTEST_OPT) ./...; \
+	fi
+
+.PHONY: tidy
+tidy:
+	rm -fr go.sum
+	$(GOCMD) mod tidy -compat=1.18
