@@ -5,6 +5,12 @@ GOTEST_OPT?= -race -timeout 300s --tags=$(GO_BUILD_TAGS)
 GOTEST=$(GOCMD) test
 RUNNING_ON_GITHUB_ACTION=$(GITHUB_ACTIONS)
 
+LINT=golangci-lint
+
+.PHONY: lint
+lint:
+	$(LINT) run --allow-parallel-runners
+
 
 .PHONY: test
 test:

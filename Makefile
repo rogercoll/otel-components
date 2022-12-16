@@ -30,6 +30,7 @@ TOOLS_MOD_DIR := ./internal/tools
 .PHONY: install-tools
 install-tools:
 	cd $(TOOLS_MOD_DIR) && $(GOCMD) install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/mdatagen
+	cd $(TOOLS_MOD_DIR) && $(GOCMD) install github.com/golangci/golangci-lint/cmd/golangci-lint
 
 .PHONY: generate
 generate:
@@ -50,3 +51,10 @@ for-all-target: $(ALL_MODS)
 gotest:
 	$(MAKE) $(FOR_GROUP_TARGET) TARGET="test"
 
+.PHONY: golint
+golint:
+	$(MAKE) $(FOR_GROUP_TARGET) TARGET="lint"
+
+.PHONY: gotidy
+gotidy:
+	$(MAKE) $(FOR_GROUP_TARGET) TARGET="tidy"
