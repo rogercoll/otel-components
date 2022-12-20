@@ -1,4 +1,4 @@
-module github.com/rogercoll/otel-components/byeworldreceiver
+module github.com/rogercoll/otel-components/receiver/byeworldreceiver
 
 go 1.18
 

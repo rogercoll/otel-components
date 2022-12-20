@@ -1,4 +1,4 @@
-module github.com/rogercoll/otel-components/helloworldreceiver
+module github.com/rogercoll/otel-components/receiver/helloworldreceiver
 
 go 1.18
 
